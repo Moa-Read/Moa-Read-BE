@@ -3,9 +3,11 @@ package dongduk.cs.moaread.dto.base;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import dongduk.cs.moaread.exception.ErrorCode;
+import dongduk.cs.moaread.exception.status.ErrorCode;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @AllArgsConstructor
 @JsonPropertyOrder({"isSuccess", "code", "message", "result"})
 public class BaseResponse<T> {
