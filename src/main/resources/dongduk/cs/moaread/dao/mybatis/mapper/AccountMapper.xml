@@ -6,6 +6,13 @@
         INSERT INTO ACCOUNT
             (ID, PASSWORD, NAME, PHONE, EMAIL, ADDRESS, DETAILED_ADDRESS, ZIP, STATUS, ROLE, CREATED_AT, UPDATED_AT, BLOG_URL)
         VALUES
-            (#{id}, #{password}, #{name}, #{phone}, #{email}, #{address}, #{detailedAddress}, #{zip}, #{status}, #{role}, #{createdAt}, #{updatedAt}, #{blogUrl})
+            (#{id}, #{password}, #{name}, #{phone}, #{email}, #{address}, #{detailedAddress}, #{zip} ,#{status}, #{role}, #{createdAt}, #{updatedAt}, #{blogUrl})
+    </insert>
+
+    <insert id="insertAccountExcludedAddress" parameterType="Account">
+        INSERT INTO ACCOUNT
+        (ID, PASSWORD, NAME, PHONE, EMAIL, STATUS, ROLE, CREATED_AT, UPDATED_AT, BLOG_URL)
+        VALUES
+            (#{id}, #{password}, #{name}, #{phone}, #{email} ,#{status}, #{role}, #{createdAt}, #{updatedAt}, #{blogUrl})
     </insert>
 </mapper>

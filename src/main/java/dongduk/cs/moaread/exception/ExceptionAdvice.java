@@ -1,7 +1,7 @@
 package dongduk.cs.moaread.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import dongduk.cs.moaread.dto.base.BaseResponse;
+import dongduk.cs.moaread.exception.status.ErrorCode;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionAdvice {
+    /* Custom Exception */
+    @ExceptionHandler(BaseException.class)
+    public BaseResponse onBaseException(BaseException exception) {
+        return BaseResponse.onFailure(exception.getErrorCode(), null);
+    }
+
     /* Validation Exception */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> onValidationException(BindingResult result) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.errorResponse(result));
+    public BaseResponse<ErrorResponse> onValidationException(BindingResult result) {
+        return BaseResponse.onFailure(ErrorCode.BAD_REQUEST, ErrorResponse.of(result));
     }
 }

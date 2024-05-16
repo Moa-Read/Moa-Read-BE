@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 
 @Service
@@ -34,11 +33,15 @@ public class AccountService {
         newAccount.setAddress(signupReqDto.getAddress());
         newAccount.setDetailedAddress(signupReqDto.getDetailedAddress());
         newAccount.setZip(signupReqDto.getZip());
-        newAccount.setStatus(Status.INVALID);
+        newAccount.setStatus(Status.ACTIVE);
         newAccount.setRole(Role.USER);
         newAccount.setCreatedAt(currentTimestamp);
         newAccount.setUpdatedAt(currentTimestamp);
         newAccount.setBlogUrl("/blog/" + signupReqDto.getId());
+
+        if (signupReqDto.getAddress() == null || signupReqDto.getDetailedAddress() == null || signupReqDto.getZip() == null) {
+            return new SignupResDto(accountDao.insertAccountExcludedAddress(newAccount));
+        }
 
         return new SignupResDto(accountDao.insertAccount(newAccount));
     }
