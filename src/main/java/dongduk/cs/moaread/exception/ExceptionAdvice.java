@@ -12,12 +12,12 @@ public class ExceptionAdvice {
     /* Custom Exception */
     @ExceptionHandler(BaseException.class)
     public BaseResponse onBaseException(BaseException exception) {
-        return BaseResponse.onFailure(exception.getErrorCode(), null);
+        return BaseResponse.onFailure(exception.getErrorCode(), exception.getMessage(), null);
     }
 
     /* Validation Exception */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public BaseResponse<ErrorResponse> onValidationException(BindingResult result) {
-        return BaseResponse.onFailure(ErrorCode.BAD_REQUEST, ErrorResponse.of(result));
+        return BaseResponse.onFailure(ErrorCode.BAD_REQUEST, null, ErrorResponse.of(result));
     }
 }

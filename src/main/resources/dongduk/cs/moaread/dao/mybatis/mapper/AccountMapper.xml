@@ -15,4 +15,10 @@
         VALUES
             (#{id}, #{password}, #{name}, #{phone}, #{email} ,#{status}, #{role}, #{createdAt}, #{updatedAt}, #{blogUrl})
     </insert>
+
+    <select id="findAccountById" resultType="Account">
+        SELECT *
+        FROM ACCOUNT
+        WHERE id = #{id}
+    </select>
 </mapper>

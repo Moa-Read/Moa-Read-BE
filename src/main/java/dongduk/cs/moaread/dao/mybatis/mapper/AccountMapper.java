@@ -6,5 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AccountMapper {
     int insertAccount(Account account);
+
     int insertAccountExcludedAddress(Account account);
+
+    Account findAccountById(String id);
 }

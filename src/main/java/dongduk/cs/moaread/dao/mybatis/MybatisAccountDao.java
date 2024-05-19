@@ -19,4 +19,8 @@ public class MybatisAccountDao implements AccountDao {
     public int insertAccountExcludedAddress(Account account) throws DataAccessException {
         return accountMapper.insertAccountExcludedAddress(account);
     }
+
+    public Account findAccountById(String id) throws DataAccessException {
+        return accountMapper.findAccountById(id);
+    }
 }
