@@ -24,7 +24,7 @@ public class BaseResponse<T> {
     }
 
     /* 요청 실패 응답 */
-    public static <T> BaseResponse<T> onFailure(ErrorCode errorCode, T result) {
-        return new BaseResponse<>(false, errorCode.getCode(), errorCode.getMessage(), result);
+    public static <T> BaseResponse<T> onFailure(ErrorCode errorCode, String message, T result) {
+        return new BaseResponse<>(false, errorCode.getCode(), message, result);
     }
 }
