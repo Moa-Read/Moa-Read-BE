@@ -19,6 +19,25 @@
     <select id="findAccountById" resultType="Account">
         SELECT *
         FROM ACCOUNT
-        WHERE id = #{id}
+        WHERE ID = #{id}
     </select>
+
+    <update id="updateStatus">
+        UPDATE ACCOUNT
+        SET STATUS = 'INACTIVE'
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateAccount">
+        UPDATE ACCOUNT SET
+        PASSWORD = #{password},
+        NAME = #{name},
+        PHONE = #{phone},
+        EMAIL = #{email},
+        ADDRESS = #{address},
+        DETAILED_ADDRESS = #{detailedAddress},
+        ZIP = #{zip},
+        UPDATED_AT = #{updatedAt}
+        WHERE ID = #{id}
+    </update>
 </mapper>

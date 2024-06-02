@@ -6,8 +6,11 @@ import dongduk.cs.moaread.domain.account.Role;
 import dongduk.cs.moaread.domain.account.Status;
 import dongduk.cs.moaread.dto.account.request.LoginReqDto;
 import dongduk.cs.moaread.dto.account.request.SignupReqDto;
+import dongduk.cs.moaread.dto.account.request.UpdateReqDto;
 import dongduk.cs.moaread.dto.account.response.LoginResDto;
+import dongduk.cs.moaread.dto.account.response.ProfileResDto;
 import dongduk.cs.moaread.dto.account.response.SignupResDto;
+import dongduk.cs.moaread.dto.account.response.UpdateResDto;
 import dongduk.cs.moaread.exception.BaseException;
 import dongduk.cs.moaread.exception.status.ErrorCode;
 import jakarta.transaction.Transactional;
@@ -66,5 +69,45 @@ public class AccountService {
         }
 
         return new LoginResDto(loginAccount.getId());
+    }
+
+    /* 회원 탈퇴 */
+    @Transactional
+    public int withdraw(String id) {
+        return accountDao.updateStatus(id);
+    }
+
+    /* 프로필 조회 */
+    @Transactional
+    public ProfileResDto getProfile(String id) {
+        Account account = accountDao.findAccountById(id);
+
+        if (account == null) {
+            throw new BaseException(ErrorCode.ACCOUNT_NOT_FOUND);
+        }
+
+        ProfileResDto profile = new ProfileResDto(account.getId(), account.getName(), account.getPhone(), account.getEmail(),
+                account.getAddress(), account.getDetailedAddress(), account.getZip(), account.getBlogUrl());
+
+        return profile;
+    }
+
+    /* 프로필 수정 */
+    @Transactional
+    public UpdateResDto updateProfile(String accoundId, UpdateReqDto updateReqDto) {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+        Account updateAccount = new Account();
+        updateAccount.setId(accoundId);
+        updateAccount.setPassword(passwordEncoder.encode(updateReqDto.getPassword()));
+        updateAccount.setName(updateReqDto.getName());
+        updateAccount.setPhone(updateReqDto.getPhone());
+        updateAccount.setEmail(updateReqDto.getEmail());
+        updateAccount.setAddress(updateReqDto.getAddress());
+        updateAccount.setDetailedAddress(updateReqDto.getDetailedAddress());
+        updateAccount.setZip(updateReqDto.getZip());
+        updateAccount.setUpdatedAt(currentTimestamp);
+
+        return new UpdateResDto(accountDao.updateAccount(updateAccount));
     }
 }

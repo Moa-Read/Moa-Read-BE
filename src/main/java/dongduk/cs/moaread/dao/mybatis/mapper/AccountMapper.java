@@ -10,4 +10,8 @@ public interface AccountMapper {
     int insertAccountExcludedAddress(Account account);
 
     Account findAccountById(String id);
+
+    int updateStatus(String id);
+
+    int updateAccount(Account account);
 }

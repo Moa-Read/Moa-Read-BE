@@ -13,7 +13,11 @@ public enum ErrorCode {
     BAD_REQUEST("COMMON4002", "잘못된 요청입니다.", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED("COMMON4003", "권한이 없는 요청입니다.", HttpStatus.UNAUTHORIZED),
     METHOD_NOT_ALLOWED("COMMON4004", "지원하지 않는 Http Method 입니다.", HttpStatus.METHOD_NOT_ALLOWED),
-    FORBIDDEN("COMMON4005", "금지된 요청입니다.", HttpStatus.FORBIDDEN);
+    FORBIDDEN("COMMON4005", "금지된 요청입니다.", HttpStatus.FORBIDDEN),
+
+    /* Account Error */
+    REQUIRED_LOGIN("ACCOUNT4001", "로그인이 필요합니다.", HttpStatus.BAD_REQUEST),
+    ACCOUNT_NOT_FOUND("ACCOUNT4002", "해당 사용자를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
 
     private String code;
     private String message;
