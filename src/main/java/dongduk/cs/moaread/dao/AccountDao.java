@@ -9,4 +9,8 @@ public interface AccountDao {
     int insertAccountExcludedAddress(Account account) throws DataAccessException;
 
     Account findAccountById(String id) throws DataAccessException;
+
+    int updateStatus(String id) throws DataAccessException;
+
+    int updateAccount(Account account) throws DataAccessException;
 }
