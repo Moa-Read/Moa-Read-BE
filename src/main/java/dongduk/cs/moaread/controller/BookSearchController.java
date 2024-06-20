@@ -17,6 +17,8 @@ public class BookSearchController {
                               @RequestParam(defaultValue = "10") int display,
                               @RequestParam(defaultValue = "1") int start,
                               @RequestParam(defaultValue = "sim") String sort) {
-        return naverBookSearchService.searchBooks(query, display, start, sort);
+        String result = naverBookSearchService.searchBooks(query, display, start, sort);
+        naverBookSearchService.saveBooks(result);
+        return result;
     }
 }
