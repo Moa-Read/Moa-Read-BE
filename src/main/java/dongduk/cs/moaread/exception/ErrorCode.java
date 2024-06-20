@@ -13,7 +13,9 @@ public enum ErrorCode {
     BAD_REQUEST("COMMON4002", "잘못된 요청입니다.", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED("COMMON4003", "권한이 잘못되었습니다.", HttpStatus.UNAUTHORIZED),
     METHOD_NOT_ALLOWED("COMMON4004", "지원하지 않는 Http Method 입니다.", HttpStatus.METHOD_NOT_ALLOWED),
-    FORBIDDEN("COMMON4005", "금지된 요청입니다.", HttpStatus.FORBIDDEN);
+    FORBIDDEN("COMMON4005", "금지된 요청입니다.", HttpStatus.FORBIDDEN),
+    ITEM_NOT_FOUND("COMMON4005", "발견되지 않았습니다.", HttpStatus.NOT_FOUND),
+    REQUIRED_LOGIN("COMMON4006", "관리자가 아닙니다.", HttpStatus.UNAUTHORIZED);
 
     /* Account Error */
     

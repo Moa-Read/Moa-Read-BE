@@ -7,10 +7,13 @@ public class BaseException extends RuntimeException{
     String message;
     HttpStatus httpStatus;
 
-    public BaseException(ErrorCode errorCode) {
+    public BaseException(ErrorCode errorCode, String itemCreationFailed) {
         super();
         this.errorCode = errorCode;
         this.message = errorCode.getMessage();
         this.httpStatus = errorCode.getHttpStatus();
+    }
+
+    public BaseException(dongduk.cs.moaread.domain.item.ErrorCode errorCode) {
     }
 }
