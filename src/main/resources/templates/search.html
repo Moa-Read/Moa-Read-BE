@@ -2,20 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Book Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(event) {
+                event.preventDefault();
+                var query = $('input[name="query"]').val();
+                $.get('/search', { query: query }, function(data) {
+                    var items = data.items;
+                    var resultHtml = '';
+                    $.each(items, function(index, item) {
+                        resultHtml += '<li>';
+                        resultHtml += '<h2>' + item.title + '</h2>';
+                        resultHtml += '<p>Author: ' + item.author + '</p>';
+                        resultHtml += '<p>Publisher: ' + item.publisher + '</p>';
+                        resultHtml += '<p>Publish Date: ' + item.pubdate + '</p>';
+                        resultHtml += '<p>Description: ' + item.description + '</p>';
+                        resultHtml += '<p>Price: ' + item.discount + '</p>';
+                        if (item.image) {
+                            resultHtml += '<img src="' + item.image + '" alt="Book Image" />';
+                        }
+                        resultHtml += '</li>';
+                    });
+                    $('ul').html(resultHtml);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <h1>Book Search Results</h1>
-<form action="#" th:action="@{/search}" method="get">
+<form>
     <input type="text" name="query" placeholder="Search for books" required />
     <button type="submit">Search</button>
 </form>
-<div th:if="${result != null}">
-    <ul>
-        <li th:each="item : ${#jsonpath.eval(result, '$.items[*]')}">
-            <p>Title: <span th:text="${item.title}">Title</span></p>
-            <p>Author: <span th:text="${item.author}">Author</span></p>
-        </li>
-    </ul>
-</div>
+<ul></ul>
 </body>
 </html>
