@@ -27,7 +27,7 @@ public class ItemController {
         HttpSession session = request.getSession();
         Object object = session.getAttribute("userSession");
         if (object == null || !object.equals("admin")) {
-            throw new BaseException(EErrorCode.REQUIRED_LOGIN);
+            throw new BaseException(ErrorCode.REQUIRED_LOGIN);
         }
 
         return BaseResponse.onSuccess(itemService.createItem(createItemReqDto));
